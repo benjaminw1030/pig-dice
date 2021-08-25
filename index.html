@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
   <link rel="stylesheet" href="css/styles.css" type="text/css">
@@ -7,6 +8,7 @@
   <script src="js/scripts.js"></script>
   <title>Pig Dice Game</title>
 </head>
+
 <body>
   <div class="container">
     <h1>Pig Dice</h1>
@@ -14,10 +16,11 @@
     <ul>
       <li>If the player rolls a 1, they score nothing and it becomes the next player's turn.</li>
       <li>If the player rolls any other number, it is added to their turn total and the player's turn continues.</li>
-      <li>If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.</li>
+      <li>If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's
+        turn.</li>
       <li>First player to 100 or more wins!</li>
     </ul>
-    
+
     <form id="name-entry">
       <h3>Enter player names:</h3>
       <div class="form-group">
@@ -30,25 +33,44 @@
       </div>
       <button type="submit" class="btn btn-success" button id="start">Start!</button>
     </form>
-    
+
     <div id="player-1-play">
-      <p>Current score: <span id="player-1-current"></span><p>
-        <p>Total score: <span id="player-1-total"></span><p>  
-      <button type="button" class="btn btn-success" button id="player-1-roll">Roll dice!</button>
-      <button type="button" class="btn btn-success" button id="player-1-hold">Hold!</button>
+      <h5><span id="player-1-name"></span>'s Turn</h5>
+      <p>Current score: <span id="player-1-current"></span>
+      <p>
+      <p>Total score: <span id="player-1-total"></span>
+      <p>
+        <img class=dice-img id="p1-dice-1" src="img/1.png" alt="1">
+        <img class=dice-img id="p1-dice-2" src="img/2.png" alt="2">
+        <img class=dice-img id="p1-dice-3" src="img/3.png" alt="3">
+        <img class=dice-img id="p1-dice-4" src="img/4.png" alt="4">
+        <img class=dice-img id="p1-dice-5" src="img/5.png" alt="5">
+        <img class=dice-img id="p1-dice-6" src="img/6.png" alt="6">
+        <button type="button" class="btn btn-success" button id="player-1-roll">Roll dice!</button>
+        <button type="button" class="btn btn-success" button id="player-1-hold">Hold!</button>
     </div>
 
     <div id="player-2-play">
-      <p>Current score: <span id="player-2-current"></span><p>
-      <p>Total score: <span id="player-2-total"></span><p>  
-      <button type="button" class="btn btn-success" button id="player-2-roll">Roll dice!</button>
-      <button type="button" class="btn btn-success" button id="player-2-hold">Hold!</button>
+      <h5><span id="player-2-name"></span>'s Turn</h5>
+      <p>Current score: <span id="player-2-current"></span>
+      <p>
+      <p>Total score: <span id="player-2-total"></span>
+      <p>
+        <img class=dice-img id="p2-dice-1" src="img/1.png" alt="1">
+        <img class=dice-img id="p2-dice-2" src="img/2.png" alt="2">
+        <img class=dice-img id="p2-dice-3" src="img/3.png" alt="3">
+        <img class=dice-img id="p2-dice-4" src="img/4.png" alt="4">
+        <img class=dice-img id="p2-dice-5" src="img/5.png" alt="5">
+        <img class=dice-img id="p2-dice-6" src="img/6.png" alt="6">
+        <button type="button" class="btn btn-success" button id="player-2-roll">Roll dice!</button>
+        <button type="button" class="btn btn-success" button id="player-2-hold">Hold!</button>
     </div>
 
     <div id="win-display">
-      <h2>Player <span id="winner"></span> wins!</h2>
+      <h2><span id="winner"></span> wins!</h2>
       <button type="button" class="btn btn-success" button id="play-again">Play again!</button>
     </div>
   </div>
 </body>
+
 </html>

@@ -1,5 +1,14 @@
-/* #player-1-play,
+#player-1-play,
 #player-2-play,
 #win-display {
   display: none;
-} */
+}
+
+.dice-img {
+  width: 100px;
+  display: none;
+}
+
+#p1-dice-1 {
+  display: inline;
+}
