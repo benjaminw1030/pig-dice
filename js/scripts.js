@@ -20,7 +20,7 @@ Player.prototype.rollAgain = function() {
   console.log(roll);
   if (roll === 1) {
     this.currentScore = 0;
-    this.endTurn;
+    this.endTurn();
   } else {
     this.currentScore += roll;
   }

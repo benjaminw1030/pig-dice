@@ -1,3 +1,5 @@
-#winner {
+#player-1-play,
+#player-2-play,
+#win-display {
   display: none;
 }
