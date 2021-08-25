@@ -26,6 +26,29 @@ Player.prototype.roll = function () {
   return roll;
 }
 
+Player.prototype.roll2 = function () {
+  const roll1 = rollDice();
+  const roll2 = rollDice();
+  if (roll1 === roll2 && roll1 === 1) {
+    this.currentScore = 0;
+    this.endTurn();
+    this.totalScore = 0;
+  } else if (roll1 === 1 || roll2 === 1) {
+    this.currentScore = 0;
+    this.endTurn();
+  } else if (roll1 === roll2) {
+    this.currentScore += roll1 + roll2;
+    rollAgain();
+  } else {
+    this.currentScore += roll1 + roll2;
+  }
+}
+// Describe rollTwo()
+// 1. Perform rollDice() twice.
+// 2. Check for a single 1, end turn.
+// 3. Check for a double 1, clear total score and end turn.
+// 4. Check for any other double, add score and must roll again.
+
 Player.prototype.winCheck = function () {
   if (this.totalScore >= 100) {
     return true
@@ -44,9 +67,21 @@ function rollOne() {
   $(hideButton).hide();
 }
 
+function rollAgain() {
+  let hideButton = "#player-" + currentPlayer + "-hold"
+  $(hideButton).hide();
+}
+
+function newPlayer () {
+  let show1 = "#player-" + currentPlayer + "-hold"
+  let show2 = "#player-" + currentPlayer + "-roll"
+  let hide = "#player-" + currentPlayer + "-play"
+  $(show1).show();
+  $(show2).show();
+  $(hide).hide();
+}
+
 function playerOneEnd() {
-  $("#player-1-roll").show();
-  $("#player-1-play").hide();
   $("#p2-dice-1").show();
   if (player1.winCheck() === true) {
     $("#win-display").fadeIn();
@@ -54,12 +89,11 @@ function playerOneEnd() {
   } else {
     $("#player-2-play").fadeIn();
   }
+  newPlayer();
   currentPlayer = 2;
 }
 
 function playerTwoEnd() {
-  $("#player-2-roll").show();
-  $("#player-2-play").hide();
   $("#p1-dice-1").show();
   if (player2.winCheck() === true) {
     $("#win-display").fadeIn();
@@ -67,6 +101,7 @@ function playerTwoEnd() {
   } else {
     $("#player-1-play").fadeIn();
   }
+  newPlayer();
   currentPlayer = 1;
 }
 
@@ -75,6 +110,7 @@ function attachButtonRollListeners() {
   $("button#player-1-roll").on("click", function () {
     let roll = player1.roll();
     let diceId = "#p1-dice-" + roll;
+    $("#player-1-hold").show();
     $("#player-1-current").text(player1.currentScore);
     if (roll === 1) {
       rollOne();
@@ -86,6 +122,7 @@ function attachButtonRollListeners() {
   $("button#player-2-roll").on("click", function () {
     let roll = player2.roll();
     let diceId = "#p2-dice-" + roll;
+    $("#player-2-hold").show();
     $("#player-2-current").text(player2.currentScore);
     if (roll === 1) {
       rollOne();

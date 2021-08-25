@@ -12,3 +12,10 @@
 #p1-dice-1 {
   display: inline;
 }
+
+body {
+  background-image: url("../img/dice-background.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  color: lightgray;
+}
