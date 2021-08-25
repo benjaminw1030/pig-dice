@@ -7,7 +7,7 @@ Describe rollDice()
 1. Create function to make dice.
 2. Use randomizer to produce number
 
-Describe rollAgain()
+Describe roll()
 1. Add rollDice number to current score. 
 2. else if roll 1 lose current score.
 3. Function should end turn if a one is rolled.
