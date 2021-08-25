@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <script src="js/jquery-3.6.0.js"></script>
+  <script src="js/scripts.js"></script>
+  <title>Pig Dice Game</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Pig Dice</h1>
+    <p>Play pig dice with another player! Here are the rules:</p>
+    <ul>
+      <li>If the player rolls a 1, they score nothing and it becomes the next player's turn.</li>
+      <li>If the player rolls any other number, it is added to their turn total and the player's turn continues.</li>
+      <li>If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.</li>
+      <li>First player to 100 or more wins!</li>
+    </ul>
+    
+    <form id="name-entry">
+      <h3>Enter player names:</h3>
+      <div class="form-group">
+        <label for="player-1">Player 1</label>
+        <input type="text" class="form-control" id="player-1">
+      </div>
+      <div class="form-group">
+        <label for="player-2">Player 2</label>
+        <input type="text" class="form-control" id="player-2">
+      </div>
+    </form>
+    
+    <div id="player-1-play">
+      <p>Current score: <span id="player-1-current"></span><p>
+        <p>Total score: <span id="player-1-total"></span><p>  
+      <button type="button" class="btn btn-success" button id="player-1-roll">Roll dice!</button>
+      <button type="button" class="btn btn-success" button id="player-1-hold">Hold!</button>
+    </div>
+
+    <div id="player-2-play">
+      <p>Current score: <span id="player-2-current"></span><p>
+      <p>Total score: <span id="player-2-total"></span><p>  
+      <button type="button" class="btn btn-success" button id="player-2-roll">Roll dice!</button>
+      <button type="button" class="btn btn-success" button id="player-2-hold">Hold!</button>
+    </div>
+
+    <div id="win-display">
+      <h2>Player <span id="winner"></span> wins!</h2>
+      <button type="button" class="btn btn-success" button id="play-again">Play again!</button>
+    </div>
+  </div>
+</body>
+</html>
