@@ -36,18 +36,11 @@ Player.prototype.roll2 = function () {
   } else if (roll1 === 1 || roll2 === 1) {
     this.currentScore = 0;
     this.endTurn();
-  } else if (roll1 === roll2) {
-    this.currentScore += roll1 + roll2;
-    rollAgain();
   } else {
     this.currentScore += roll1 + roll2;
   }
+  return [roll1, roll2];
 }
-// Describe rollTwo()
-// 1. Perform rollDice() twice.
-// 2. Check for a single 1, end turn.
-// 3. Check for a double 1, clear total score and end turn.
-// 4. Check for any other double, add score and must roll again.
 
 Player.prototype.winCheck = function () {
   if (this.totalScore >= 100) {
@@ -60,26 +53,31 @@ Player.prototype.winCheck = function () {
 
 let player1 = new Player("", 0, 0);
 let player2 = new Player("", 0, 0);
-let currentPlayer = 1
+let currentPlayer = 1;
+let gameType = 1;
 
 function rollOne() {
   let hideButton = "#player-" + currentPlayer + "-roll"
   $(hideButton).hide();
 }
 
-function rollAgain() {
+function rollDoubles() {
   let hideButton = "#player-" + currentPlayer + "-hold"
   $(hideButton).hide();
 }
 
-function newPlayer () {
+function newPlayer() {
   $(".dice-img").hide();
   let show1 = "#player-" + currentPlayer + "-hold"
   let show2 = "#player-" + currentPlayer + "-roll"
-  let show3 = "#p" + currentPlayer + "-dice-1"
+  let show3 = "#p" + currentPlayer + "-dice-1-1"
   $(show1).show();
   $(show2).show();
   $(show3).show();
+  if (gameType === 2) {
+    let show4 = "#p" + currentPlayer + "-dice-2-1"
+    $(show4).show();
+  }
 }
 
 function playerOneEnd() {
@@ -109,27 +107,59 @@ function playerTwoEnd() {
 function attachButtonRollListeners() {
 
   $("button#player-1-roll").on("click", function () {
-    let roll = player1.roll();
-    let diceId = "#p1-dice-" + roll;
-    $("#player-1-hold").show();
-    $("#player-1-current").text(player1.currentScore);
-    if (roll === 1) {
-      rollOne();
+    if (gameType === 1) {
+      let roll = player1.roll();
+      let diceId = "#p1-dice-1-" + roll;
+      $("#player-1-hold").show();
+      $("#player-1-current").text(player1.currentScore);
+      if (roll === 1) {
+        rollOne();
+      }
+      $(".dice-img").hide();
+      $(diceId).fadeIn();
+    } else {
+      let roll = player1.roll2();
+      let diceId1 = "#p1-dice-1-" + roll[0];
+      let diceId2 = "#p1-dice-2-" + roll[1];
+      $("#player-1-hold").show();
+      $("#player-1-current").text(player1.currentScore);
+      if (roll[0] === 1 || roll[1] === 1) {
+        rollOne();
+      } else if (roll[0] === roll[1]) {
+        rollDoubles();
+      }
+      $(".dice-img").hide();
+      $(diceId1).fadeIn();
+      $(diceId2).fadeIn();
     }
-    $(".dice-img").hide();
-    $(diceId).fadeIn();
   });
 
   $("button#player-2-roll").on("click", function () {
-    let roll = player2.roll();
-    let diceId = "#p2-dice-" + roll;
-    $("#player-2-hold").show();
-    $("#player-2-current").text(player2.currentScore);
-    if (roll === 1) {
-      rollOne();
+    if (gameType === 1) {
+      let roll = player2.roll();
+      let diceId = "#p2-dice-1-" + roll;
+      $("#player-2-hold").show();
+      $("#player-2-current").text(player2.currentScore);
+      if (roll === 1) {
+        rollOne();
+      }
+      $(".dice-img").hide();
+      $(diceId).fadeIn();
+    } else {
+      let roll = player2.roll2();
+      let diceId1 = "#p2-dice-1-" + roll[0];
+      let diceId2 = "#p2-dice-2-" + roll[1];
+      $("#player-2-hold").show();
+      $("#player-2-current").text(player2.currentScore);
+      if (roll[0] === 1 || roll[1] === 1) {
+        rollOne();
+      } else if (roll[0] === roll[1]) {
+        rollDoubles();
+      }
+      $(".dice-img").hide();
+      $(diceId1).fadeIn();
+      $(diceId2).fadeIn();
     }
-    $(".dice-img").hide();
-    $(diceId).fadeIn();
   });
 
   $("button#player-1-hold").on("click", function () {
@@ -157,8 +187,16 @@ $(document).ready(function () {
     event.preventDefault();
     const p1 = $("input#player-1").val();
     const p2 = $("input#player-2").val();
+    const game = parseInt($("select#game-type").val());
     player1.name = p1;
     player2.name = p2;
+    gameType = game;
+    if (game === 1) {
+      $("#p1-dice-1-1").show();
+    } else {
+      $("#p1-dice-1-1").show();
+      $("#p1-dice-2-1").show();
+    }
     $("#player-1-name").text(p1);
     $("#player-2-name").text(p2);
     $("form#name-entry").hide();
