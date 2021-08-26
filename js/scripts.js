@@ -73,16 +73,18 @@ function rollAgain() {
 }
 
 function newPlayer () {
+  $(".dice-img").hide();
   let show1 = "#player-" + currentPlayer + "-hold"
   let show2 = "#player-" + currentPlayer + "-roll"
-  let hide = "#player-" + currentPlayer + "-play"
+  let show3 = "#p" + currentPlayer + "-dice-1"
   $(show1).show();
   $(show2).show();
-  $(hide).hide();
+  $(show3).show();
 }
 
 function playerOneEnd() {
-  $("#p2-dice-1").show();
+  $("#player-1-play").hide();
+  currentPlayer = 2;
   if (player1.winCheck() === true) {
     $("#win-display").fadeIn();
     $("#winner").text(player1.name);
@@ -90,11 +92,11 @@ function playerOneEnd() {
     $("#player-2-play").fadeIn();
   }
   newPlayer();
-  currentPlayer = 2;
 }
 
 function playerTwoEnd() {
-  $("#p1-dice-1").show();
+  $("#player-2-play").hide();
+  currentPlayer = 1;
   if (player2.winCheck() === true) {
     $("#win-display").fadeIn();
     $("#winner").text(player2.name);
@@ -102,7 +104,6 @@ function playerTwoEnd() {
     $("#player-1-play").fadeIn();
   }
   newPlayer();
-  currentPlayer = 1;
 }
 
 function attachButtonRollListeners() {
