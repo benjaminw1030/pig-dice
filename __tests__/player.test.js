@@ -15,8 +15,15 @@ describe ("Player", () => {
     expect(player.totalScore).toEqual(34);
     expect(player.currentScore).toEqual(0);
   });
-  test("Should produce a diceroll", () => {
+  test("Should produce a diceroll from 1 to 6", () => {
     expect(player.roll()).toBeGreaterThanOrEqual(1);
     expect(player.roll()).toBeLessThanOrEqual(6);
+  });
+  test("Should set current score to 0 and end turn when roll equals 1", () => {
+    let roll = player.roll();
+    if (roll === 1) {
+    expect(player.currentScore).toEqual(0);
+    expect(player.endTurn()).toHaveBeenCalled();
+    }
   });
 });
