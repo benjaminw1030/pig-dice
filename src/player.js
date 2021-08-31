@@ -7,6 +7,7 @@ export default function Player(name, currentScore, totalScore) {
 Player.prototype.endTurn = function () {
   this.totalScore += this.currentScore;
   this.currentScore = 0;
+  return true;
 };
 
 Player.prototype.roll = function () {
@@ -23,7 +24,7 @@ Player.prototype.roll = function () {
 Player.prototype.roll2 = function () {
   const roll1 = rollDice();
   const roll2 = rollDice();
-  if (roll1 === roll2 && roll1 === 1) {
+  if (roll1 === 1 && roll2 === 1) {
     this.currentScore = 0;
     this.endTurn();
     this.totalScore = 0;
@@ -43,6 +44,6 @@ Player.prototype.winCheck = function () {
   return false;
 };
 
-export function rollDice() {
+function rollDice() {
   return Math.ceil(Math.random() * 6);
 }
